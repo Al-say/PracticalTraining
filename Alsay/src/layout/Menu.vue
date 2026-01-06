@@ -1,13 +1,32 @@
 <template>
-    <el-menu default-active="/home" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened router
+    <MenuLogo></MenuLogo>
+    <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened router
         @open="handleOpen" @close="handleClose" background-color="#3CA2E0" text-color="#fff" active-text-color="#ffd04b">
         <MenuItem :menuList="menuList"></MenuItem>
     </el-menu>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import MenuItem from './MenuItem.vue';
+import MenuLogo from './MenuLogo.vue' //logo
+import { useRoute } from 'vue-router'; //获取路由信息
+import { collapseStore } from '@/store/collapse/index';
+//引入 collapseStore
+const collStore = collapseStore()
+//获取路由信息
+const route = useRoute();
+
+//获取激活的菜单
+const activeIndex = computed(() => {
+    const { path } = route;
+    return path;
+})
+
+//折叠
+const isCollapse = computed(()=>{
+  return collStore.getCollapse
+})
 //菜单数据
 let menuList = reactive([
     {
@@ -221,8 +240,7 @@ let menuList = reactive([
         ],
     }
 ]);
-//折叠
-const isCollapse = ref(false)
+
 //展开
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)

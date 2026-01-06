@@ -1,17 +1,19 @@
 <template>
      <!-- 主容器，使用 Element Plus 的 el-container 布局 -->
      <el-container class="container">
-      <!-- 侧边栏，宽度 220px，包含菜单 -->
-      <el-aside width="220px" class="aside">
+      <!-- 侧边栏，宽度 auto，包含菜单 -->
+      <el-aside width="auto" class="aside">
         <Menu></Menu>
       </el-aside>
       <!-- 主内容区域 -->
       <el-container>
         <!-- 头部区域 -->
-        <el-header class="header">Header</el-header>
+        <el-header class="header">
+          <Collapse></Collapse>
+        </el-header>
         <!-- 主内容区，显示路由视图 -->
         <el-main class="main">
-            <router-view></router-view>
+            <router-view></router-view> 
         </el-main>
       </el-container>
     </el-container>
@@ -20,6 +22,8 @@
 <script setup lang="ts">
 // 导入菜单组件
 import Menu from './Menu.vue'; 
+// 导入折叠按钮组件
+import Collapse from './Collapse.vue';
 </script>
 
 <style lang="scss" scoped>
@@ -33,6 +37,9 @@ import Menu from './Menu.vue';
         .header {
             // 头部背景色
             background-color: #81b8e8;
+            display: flex;
+            align-items: center;
+            color: #FFF;
         }
         .main {
             // 主内容区背景色
