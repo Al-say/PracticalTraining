@@ -26,8 +26,6 @@
 <script setup lang="ts">
 //接收父组件传递过来的参数
 defineProps(['menuList'])
-
-export default {}
 </script>
 
 <style scoped>
