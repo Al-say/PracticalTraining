@@ -18,7 +18,7 @@ import Menu from './Menu.vue';
 
 <style lang="scss" scoped>
     .container {
-        height: 100%;
+        height: 100vh;
         .aside {
             background-color: #3CA2E0;
         }
@@ -28,6 +28,11 @@ import Menu from './Menu.vue';
         .main {
             background-color: #e7eaec;
         }
+    }
+
+    /* 去掉 el-main 默认 padding */
+    .el-main {
+        padding: 0 !important;
     }
 
     /* 响应式设计 */
