@@ -29,4 +29,11 @@ import Menu from './Menu.vue';
             background-color: #e7eaec;
         }
     }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+        .aside {
+            width: 150px !important;
+        }
+    }
 </style>

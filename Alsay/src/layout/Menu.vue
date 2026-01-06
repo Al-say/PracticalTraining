@@ -240,6 +240,13 @@ const handleClose = (key: string, keyPath: string[]) => {
     min-height: 400px;
 }
 
+/* 响应式 */
+@media (max-width: 768px) {
+    .el-menu-vertical-demo:not(.el-menu--collapse) {
+        width: 150px;
+    }
+}
+
 .el-menu {
     border-right: none;
 }
