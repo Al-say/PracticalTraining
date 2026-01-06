@@ -1,10 +1,15 @@
 <template>
+     <!-- 主容器，使用 Element Plus 的 el-container 布局 -->
      <el-container class="container">
+      <!-- 侧边栏，宽度 220px，包含菜单 -->
       <el-aside width="220px" class="aside">
         <Menu></Menu>
       </el-aside>
+      <!-- 主内容区域 -->
       <el-container>
+        <!-- 头部区域 -->
         <el-header class="header">Header</el-header>
+        <!-- 主内容区，显示路由视图 -->
         <el-main class="main">
             <router-view></router-view>
         </el-main>
@@ -13,19 +18,24 @@
 </template>
 
 <script setup lang="ts">
+// 导入菜单组件
 import Menu from './Menu.vue'; 
 </script>
 
 <style lang="scss" scoped>
     .container {
+        // 容器高度为视口高度，确保全屏布局
         height: 100vh;
         .aside {
+            // 侧边栏背景色
             background-color: #3CA2E0;
         }
         .header {
+            // 头部背景色
             background-color: #81b8e8;
         }
         .main {
+            // 主内容区背景色
             background-color: #e7eaec;
         }
     }
@@ -35,7 +45,7 @@ import Menu from './Menu.vue';
         padding: 0 !important;
     }
 
-    /* 响应式设计 */
+    /* 响应式设计，小屏幕时侧边栏变窄 */
     @media (max-width: 768px) {
         .aside {
             width: 150px !important;
