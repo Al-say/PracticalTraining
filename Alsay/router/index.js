@@ -7,12 +7,11 @@ const routes = [
   {
     path: "/home",
     component: Layout,
-    redirect: "/dashboard",
     children: [
       {
-        path: "/dashboard",
+        path: "",
         component: () => import("@/views/Dashboard.vue"),
-        name: "dashboard",
+        name: "home",
         meta: {
           title: "系统首页",
           icon: "#icondashboard",

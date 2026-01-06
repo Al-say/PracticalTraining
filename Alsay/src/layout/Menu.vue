@@ -1,5 +1,5 @@
 <template>
-    <el-menu default-active="/dashboard" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened router
+    <el-menu default-active="/home" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened router
         @open="handleOpen" @close="handleClose" background-color="#3CA2E0" text-color="#fff" active-text-color="#ffd04b">
         <MenuItem :menuList="menuList"></MenuItem>
     </el-menu>
@@ -11,9 +11,9 @@ import MenuItem from './MenuItem.vue';
 //菜单数据
 let menuList = reactive([
     {
-        path: "/dashboard",
+        path: "/home",
         component: "Layout",
-        name: "dashboard",
+        name: "home",
         meta: {
             title: "系统首页",
             icon: "HomeFilled",
