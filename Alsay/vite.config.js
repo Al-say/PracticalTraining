@@ -1,26 +1,26 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   server: {
-    host: "0.0.0.0", //指定服务器应该监听哪个 IP 地址。 如果将此设置为 0.0.0.0 将监听所有地址，包括局域网和公网地址。
+    host: '0.0.0.0', //解决控制台 ：Network: use --host to expose
     port: 8080, //配置端口号
     hmr: true, //开启热更新
-    open: false, //启动在浏览器打开
-  },
-  resolve: {  //别名
-    alias: [  //别名数组
-      {
-        find: "@",  //别名
-        replacement: resolve(__dirname, "src"),  //别名对应的实际路径
+    open: true, //启动在浏览器打开
+    proxy: {
+      '/api': {
+        target: 'http://localhost:10086/',	//接口地址
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
       },
-      {
-        find: "@router",  //别名
-        replacement: resolve(__dirname, "router"),  //别名对应的实际路径
-      },
-    ],
+    }
   },
-});
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+      '@router': resolve(__dirname, 'src/router')
+    }
+  }
+})
