@@ -1,5 +1,6 @@
 <template>
     <div class="logo">
+        <img v-if="show" :src="logo" class="logo-icon" />
         <span v-if="show" class="logo-title">{{ title }}</span>
     </div>
 </template>
@@ -7,10 +8,11 @@
 // import MenuLogo from '@/assets/logo.png'
 import { ref, watch } from "vue";
 import { collapseStore } from '@/store/collapse/index';
+import logo from '@/assets/logo.svg';
 // 引入 collapseStore
 const store = collapseStore()
 
-const title = ref("黑马智慧养老");
+const title = ref("马师院智慧养老");
 
 const show = ref(true)// 显示logo
 // 监听折叠状态
@@ -38,6 +40,12 @@ watch(
     cursor: pointer;
     align-items: center;
     justify-content: center;
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
 
     .logo-title {
         color: #fff;
