@@ -40,7 +40,7 @@
                             </el-table>
                             <!-- 分页插件 -->
                             <div style="margin-top:15px">
-                                <el-pagination :page-size="page.pageSize" background :current-page="page.currentPag"
+                                <el-pagination :page-size="condition.pageSize" background :current-page="condition.pageNum"
                                     layout=" prev, pager, next" :total="page.total"
                                     @current-change="handleCurrentChange" />
                             </div>
@@ -80,8 +80,8 @@
                             </el-table>
                             <!-- 分页插件 -->
                             <div style="margin-top:15px" v-if="outwardList.length > 0">
-                                <el-pagination :page-size="pageRecord.pageSize" background
-                                    :current-page="pageRecord.currentPag" layout=" prev, pager, next"
+                                <el-pagination :page-size="conditionRecord.pageSize" background
+                                    :current-page="conditionRecord.pageNum" layout=" prev, pager, next"
                                     :total="pageRecord.total" @current-change="handleRecordChange" />
                             </div>
                         </div>
@@ -136,8 +136,21 @@
             <el-form label-position="right" label-width="auto" style="max-width:380px;margin:20px auto"
                 class="demo-form-inline" ref="itemFormRef" :model="dialog.item" :rules="rules">
                 <el-form-item label="客户姓名：" prop="customerId">
-                    <el-select v-model="dialog.item.customerId" style="width:320px" placeholder="客户姓名：">
-                        <el-option v-for="item in customerList" :key="item.id" :label="item.customerName"
+                    <el-select
+                        v-model="dialog.item.customerId"
+                        style="width:320px"
+                        placeholder="客户姓名："
+                        filterable
+                        teleported
+                        popper-class="customer-select-popper"
+                        :popper-options="{
+                            modifiers: [
+                                { name: 'preventOverflow', options: { boundary: 'viewport' } },
+                                { name: 'flip', options: { fallbackPlacements: ['bottom', 'top'] } }
+                            ]
+                        }"
+                    >
+                        <el-option v-for="item in customerOptions" :key="item.id" :label="item.customerName"
                             :value="item.id" />
                     </el-select>
                 </el-form-item>
@@ -200,22 +213,24 @@ const rules = reactive({
 
 });
 // 响应式状态
-const pageList = ref([]); // 客户列表
+const pageList = ref([]); // 客户列表（分页表格）
 const outwardList = ref([]); // 外出记录列表
-const customerList = ref([]); // 客户列表
+const customerOptions = ref([]); // 客户下拉框选项（全量）
 const roleId = ref(''); // 当前用户角色id
 
 // 查询条件封装--客户
 const condition = reactive({
     customerName: "",
     userId: "",
-    pageSize: "1" // 默认第一页
+    pageNum: 1,   // ✅ 当前页
+    pageSize: 6   // ✅ 每页条数
 });
 
 // 查询条件封装--外出记录
 const conditionRecord = reactive({
     userId: "",
-    pageSize: "1" // 默认第一页
+    pageNum: 1,
+    pageSize: 6
 });
 
 // 分页属性封装 --客户
@@ -282,20 +297,21 @@ const indexMethodRecord = computed(() => {
 const query = () => {
     // 清空护理记录数据表
     outwardList.value = [];
-    condition.pageSize = "1"; // 回到第一页
+    condition.pageNum = 1; // 回到第一页
     fetchPageList();
     queryOutwardVoData();
 };
 
 // 选中页码-客户
 const handleCurrentChange = (curPage) => {
-    page.currentPag = curPage;
-    condition.pageSize = curPage; // 参数pageSize是服务端接收页码参数名
-    // 重新渲染表格
+    condition.pageNum = curPage;     // ✅ 改页码
+    console.log("客户分页 - pageNum:", condition.pageNum, "pageSize:", condition.pageSize);
     fetchPageList();
-    // 清空护理记录数据表
+
+    // 如果要切换客户页时清空右侧记录
     outwardList.value = [];
-    conditionRecord.customerId = "";
+    conditionRecord.userId = "";
+    conditionRecord.pageNum = 1;
 };
 
 // 处理客户表格行选中
@@ -311,9 +327,8 @@ const handleChangeCustomer = (row) => {
 
 // 选中页码-外出记录
 const handleRecordChange = (curPage) => {
-    pageRecord.currentPag = curPage;
-    conditionRecord.pageSize = curPage; // 参数 pageSize 是服务端接收页码参数名
-    // 重新渲染表格:
+    conditionRecord.pageNum = curPage;
+    console.log("外出记录分页 - pageNum:", conditionRecord.pageNum, "pageSize:", conditionRecord.pageSize);
     queryOutwardVoData();
 };
 
@@ -354,8 +369,10 @@ const cancelTime = () => {
 };
 
 // 添加外出申请
-const addItem = () => {
+const addItem = async () => {
     dialog.tops = "添加外出申请";
+    await fetchCustomerOptions();   // ✅ 加载全量客户选项
+    console.log("customerOptions.length =", customerOptions.value.length);
     dialog.dialogVisible = true;
 };
 
@@ -482,12 +499,23 @@ const del = (id) => {
 const fetchPageList = () => {
     getListPage(condition).then(res => {
         pageList.value = res.data.records; // 数据列表
-        customerList.value = res.data.records; // 客户列表
+
         page.total = res.data.total; // 总记录数
         page.pageSize = res.data.size; // 每页显示条数
         page.currentPag = res.data.current; // 当前页码
         page.pagCount = res.data.pages; // 总页数
     });
+};
+
+// api-加载客户下拉框选项（全量）
+const fetchCustomerOptions = async () => {
+    const params = {
+        customerName: "",
+        pageNum: 1,
+        pageSize: 10000  // 大页数获取全量
+    };
+    const res = await getListPage(params);
+    customerOptions.value = res.data.records || [];
 };
 
 // api-查询外出申请记录
@@ -505,6 +533,7 @@ const queryOutwardVoData = () => {
 onMounted(() => {
     fetchPageList();
     queryOutwardVoData();
+    fetchCustomerOptions(); // 加载客户下拉框选项
 });
 </script>
 
@@ -520,5 +549,22 @@ onMounted(() => {
   font-size: 20px;
   font-family: "Microsoft YaHei";
   line-height: 50px;
+}
+</style>
+
+<!-- 全局样式，用于修复 teleported 下拉面板滚动问题 -->
+<style lang="scss">
+/* 修复 el-select 下拉面板滚动问题 */
+.customer-select-popper .el-select-dropdown__wrap,
+.customer-select-popper .el-scrollbar__wrap {
+  max-height: 260px !important;
+  overflow: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* 备用：如果上面不生效，直接修复所有下拉 */
+.el-select-dropdown .el-scrollbar__wrap {
+  max-height: 260px !important;
+  overflow: auto !important;
 }
 </style>

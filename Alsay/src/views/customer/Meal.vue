@@ -40,16 +40,11 @@
                             <el-col :span="6" v-for="meal in breakfastList" :key="meal.id"
                                 style="margin-top: 10px;">
                                 <el-card shadow="hover">
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '正常'" type="primary">{{ meal.taste
-                                    }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多糖'" type="warning">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少糖'" type="success">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多盐'" type="warning">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少盐'" type="success">{{
-                                        meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '正常'" type="primary">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多糖'" type="warning">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少糖'" type="success">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多盐'" type="warning">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少盐'" type="success">{{ meal.taste }}</el-tag>
                                     <el-image style="width: 100%; height: 180px" :src="meal.foodImg" fit="fill" />
                                     <div class="card-info">
                                         <h4 class="meal-name">{{ meal.foodName }}</h4>
@@ -99,16 +94,11 @@
                         <el-row :gutter="20">
                             <el-col :span="6" v-for="meal in lunchList" :key="meal.id" style="margin-top: 10px;">
                                 <el-card shadow="hover">
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '正常'" type="primary">{{ meal.taste
-                                    }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多糖'" type="warning">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少糖'" type="success">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多盐'" type="warning">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少盐'" type="success">{{
-                                        meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '正常'" type="primary">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多糖'" type="warning">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少糖'" type="success">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多盐'" type="warning">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少盐'" type="success">{{ meal.taste }}</el-tag>
                                     <el-image style="width: 100%; height: 180px" :src="meal.foodImg" fit="fill" />
                                     <div class="card-info">
                                         <h4 class="meal-name">{{ meal.foodName }}</h4>
@@ -158,16 +148,11 @@
                         <el-row :gutter="20">
                             <el-col :span="6" v-for="meal in dinnerList" :key="meal.id" style="margin-top: 10px;">
                                 <el-card shadow="hover">
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '正常'" type="primary">{{ meal.taste
-                                    }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多糖'" type="warning">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少糖'" type="success">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多盐'" type="warning">{{
-                                        meal.taste }}</el-tag>
-                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少盐'" type="success">{{
-                                        meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '正常'" type="primary">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多糖'" type="warning">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少糖'" type="success">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '多盐'" type="warning">{{ meal.taste }}</el-tag>
+                                    <el-tag class="ml-2 taste" v-if="meal.taste == '少盐'" type="success">{{ meal.taste }}</el-tag>
                                     <el-image style="width: 100%; height: 180px" :src="meal.foodImg" fit="fill" />
                                     <div class="card-info">
                                         <h4 class="meal-name">{{ meal.foodName }}</h4>

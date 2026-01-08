@@ -25,3 +25,8 @@ export const editCustomer = (data) => {
 export const getCustomerById = (id) => {
     return http.get('/api/customer/getCustomerById', { params: { id:id } })
 }
+
+//查询所有客户
+export const getCustomerList = () => {
+    return http.get('/api/customer/getCustomerList')
+}

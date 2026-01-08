@@ -15,6 +15,12 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
+      // 图片资源的代理配置 - 转发给后端服务器
+      '/files': {
+        target: 'http://localhost:10086', // 转发给后端
+        changeOrigin: true,
+        // 注意：这里不需要 rewrite，因为后端确实就是 /files 开头
+      },
     }
   },
   resolve: {

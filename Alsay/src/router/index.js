@@ -47,6 +47,21 @@ const routes = [
         path: 'meal',
         component: () => import('@/views/customer/Meal.vue'),
         meta: { title: '膳食日历' }
+      },
+      {
+        path: 'nurseLevel',
+        component: () => import('@/views/nurse/NurseLevel.vue'),
+        meta: { title: '护理级别' }
+      },
+      {
+        path: "/addItemToLevel",
+        component: () => import("@/views/nurse/AddItemToLevel.vue"),
+        name: "addItemToLevel",
+        meta: {
+          title: "护理项目配置",
+          icon: "Setting",
+          roles: ["sys:addItemToLevel"],
+        },
       }
       // 其他页面可以继续添加
     ]

@@ -16,3 +16,7 @@ export const delPreference = (id) => {
 export const findPreference = (data) => {
     return http.get('/api/customerpreference/listCustomerpreferencePage', { params: data })
 }
+//获取客户列表（下拉框）
+export const getCustomerList = () => {
+    return http.get('/api/customer/customerList')
+}

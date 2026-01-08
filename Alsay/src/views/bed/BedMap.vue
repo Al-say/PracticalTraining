@@ -51,7 +51,7 @@
                         <!-- 第一行显示房间号 - 前半部分 -->
                         <template v-if="listRoom.length > 0">
                             <!-- 显示前面几个房间 -->
-                            <td v-for="(item, index) in listRoom.slice(0, 1)" :key="'room-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(0, 1)" :key="'room-' + item.roomNo">
                                 {{ item.roomNo }}
                             </td>
                             <!-- 固定的公共区域 -->
@@ -59,13 +59,13 @@
                             <td class="room_id" rowspan="2" colspan="2" style="background-color:#9AC0CD">洗衣房</td>
                             <td class="room_id" rowspan="2" colspan="2" style="background-color:#4EEE94">活动中心</td>
                             <!-- 显示中间几个房间 -->
-                            <td v-for="(item, index) in listRoom.slice(1, 4)" :key="'room-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(1, 4)" :key="'room-' + item.roomNo">
                                 {{ item.roomNo }}
                             </td>
                             <!-- 走道 -->
                             <td class="room_id" rowspan="2" style="background-color:#CDAA7D">走道</td>
                             <!-- 显示右侧几个房间 -->
-                            <td v-for="(item, index) in listRoom.slice(4, 6)" :key="'room-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(4, 6)" :key="'room-' + item.roomNo">
                                 {{ item.roomNo }}
                             </td>
                         </template>
@@ -74,7 +74,7 @@
                         <!-- 第二行显示房间内的床位 - 前半部分 -->
                         <template v-if="listRoom.length > 0">
                             <!-- 前面几个房间的床位 -->
-                            <td v-for="(item, index) in listRoom.slice(0, 1)" :key="'bed-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(0, 1)" :key="'bed-' + item.roomNo">
                                 <a href="javascript:void(0)" v-for="bedItem in item.bedList" :key="bedItem.bedNo">
                                     <div>
                                         <img v-if="bedItem.bedStatus == 1" src="@/assets/bed/kx.png" />
@@ -85,7 +85,7 @@
                                 </a>
                             </td>
                             <!-- 中间几个房间的床位 (公共区域已在上一行用 rowspan=2 设置，所以这里跳过) -->
-                            <td v-for="(item, index) in listRoom.slice(1, 4)" :key="'bed-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(1, 4)" :key="'bed-' + item.roomNo">
                                 <a href="javascript:void(0)" v-for="bedItem in item.bedList" :key="bedItem.bedNo">
                                     <div>
                                         <img v-if="bedItem.bedStatus == 1" src="@/assets/bed/kx.png" />
@@ -96,7 +96,7 @@
                                 </a>
                             </td>
                             <!-- 右侧几个房间的床位 (走道已在上一行用rowspan=2设置，所以这里跳过) -->
-                            <td v-for="(item, index) in listRoom.slice(4, 6)" :key="'bed-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(4, 6)" :key="'bed-' + item.roomNo">
                                 <a href="javascript:void(0)" v-for="bedItem in item.bedList" :key="bedItem.bedNo">
                                     <div>
                                         <img v-if="bedItem.bedStatus == 1" src="@/assets/bed/kx.png" />
@@ -114,7 +114,7 @@
                     <tr class="cwsyt_thead">
                         <!-- 第三行显示房间号 - 后半部分 -->
                         <template v-if="listRoom.length > 6">
-                            <td v-for="(item, index) in listRoom.slice(6)" :key="'room-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(6)" :key="'room-' + item.roomNo">
                                 {{ item.roomNo }}
                             </td>
                         </template>
@@ -122,7 +122,7 @@
                     <tr class="cwsyt_tbody">
                         <!-- 第四行显示房间内的床位 - 后半部分 -->
                         <template v-if="listRoom.length > 6">
-                            <td v-for="(item, index) in listRoom.slice(6)" :key="'bed-' + item.roomNo">
+                            <td v-for="item in listRoom.slice(6)" :key="'bed-' + item.roomNo">
                                 <a href="javascript:void(0)" v-for="bedItem in item.bedList" :key="bedItem.bedNo">
                                     <div>
                                         <img v-if="bedItem.bedStatus == 1" src="@/assets/bed/kx.png" />

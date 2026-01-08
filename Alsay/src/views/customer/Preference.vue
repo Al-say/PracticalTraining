@@ -100,11 +100,11 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 import { Plus } from '@element-plus/icons-vue';
 import {
   addPreference,
-  findPreference,
   updatePreference,
-  delPreference
+  delPreference,
+  findPreference,
+  getCustomerList
 } from "@/api/preferenceApi.js";
-import { getListPage } from "@/api/customerApi.js";
 
 // 表单引用
 const itemFormRef = ref(null);
@@ -116,12 +116,6 @@ const btnFlag = ref(true);
 
 // 查询条件
 const queryParams = reactive({
-  customerName: "",
-  pageSize: "1" // 默认第一页
-});
-
-// 查询条件封装--客户
-const condition = reactive({
   customerName: "",
   pageSize: "1" // 默认第一页
 });
@@ -171,7 +165,6 @@ onMounted(() => {
 const query = () => {
   queryParams.pageSize = "1"; // 回到第一页
   getPreferenceListData();
-  getPageListData();
 };
 
 // 选中页码
@@ -184,7 +177,7 @@ const handleCurrentChange = (curPage) => {
 
 // 点击修改按钮
 const edit = (row) => {
-  dialog.tops = "修改护理项目";
+  dialog.tops = "修改膳食管理";
   dialog.dialogVisible = true;
   // 初始化模态框数据
   nextTick(() => {
@@ -249,7 +242,6 @@ const save = () => {
             queryParams.pageSize = "1"; // 回到第一页
             queryParams.customerName = "";
             getPreferenceListData();
-            getPageListData();
             handleClose(); // 关闭模态框
           } else {
             ElMessage.error(res.message);
@@ -294,7 +286,7 @@ const del = (id) => {
     .catch(() => { });
 };
 
-// 查询护理项目(分页)
+// 查询膳食管理(分页)
 const getPreferenceListData = () => {
   findPreference(queryParams).then(res => {
     preferenceList.value = res.data.records;
@@ -307,8 +299,8 @@ const getPreferenceListData = () => {
 
 // 查询客户信息列表
 const getPageListData = () => {
-  getListPage(condition).then(res => {
-    customerList.value = res.data.records;
+  getCustomerList().then(res => {
+    customerList.value = res.data;
   });
 };
 </script>

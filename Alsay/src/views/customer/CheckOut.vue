@@ -284,7 +284,7 @@ const handleRecordChange = (curPage) => {
     pageRecord.currentPag = curPage;
     conditionRecord.pageSize = curPage; // 参数pageSize是服务端接收页码参数名
     // 重新渲染表格:
-    listCustomerItem();
+    queryBackdownVoData();
 };
 
 // api-查询客户信息列表-分页
@@ -333,6 +333,7 @@ const addItem = () => {
     dialog.dialogVisible = true;
 };
 
+// 对话框关闭处理
 const handleClose = () => {
     dialog.dialogVisible = false;
     resetForm(itemFormRef); // 重置表单

@@ -111,7 +111,7 @@
                             @change="getBed" placeholder="请选择房间号">
                             <el-option-group v-for="group in djDialog.roomList" :key="group.label" :label="group.label">
                                 <el-option v-for="item in group.options" :key="item.roomNo" :label="item.roomNo"
-                                :value="item.roomNo"></el-option>
+                                    :value="item.roomNo"></el-option>
                             </el-option-group>
                         </el-select>
                     </el-form-item>
@@ -343,7 +343,7 @@ const edit = (row) => {
         djDialog.customerForm.bloodType = row.bloodType;
         djDialog.customerForm.buildingNo = row.buildingNo;
         djDialog.customerForm.contactTel = row.contactTel;
-        djDialog.customerForm.customerAge = row.customerAge;
+        djDialog.customerForm.customerForm.customerAge = row.customerAge;
         djDialog.customerForm.customerName = row.customerName;
         djDialog.customerForm.customerSex = row.customerSex + ""; // 表格中获取的性别为0或1
         djDialog.customerForm.roomNo = row.roomNo;
