@@ -54,6 +54,11 @@ const routes = [
         meta: { title: '护理级别' }
       },
       {
+        path: 'nurseItem',
+        component: () => import('@/views/nurse/NurseItem.vue'),
+        meta: { title: '护理项目' }
+      },
+      {
         path: "/addItemToLevel",
         component: () => import("@/views/nurse/AddItemToLevel.vue"),
         name: "addItemToLevel",

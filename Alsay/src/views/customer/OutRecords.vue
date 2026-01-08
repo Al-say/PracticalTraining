@@ -195,15 +195,15 @@ import { queryOutwardVo, addOutward, examineOutward, delOutward, updateBackTime 
 import { getSessionStorage, getCurDate } from '@/utils/common.js';
 
 // 表单引用
-const itemFormRef = ref(ElForm);
-const itemExamineFormRef = ref(ElForm);
-const itemTimeFormRef = ref(ElForm);
+const itemFormRef = ref(null);
+const itemExamineFormRef = ref(null);
+const itemTimeFormRef = ref(null);
 
 // 校验规则
 const rules = reactive({
     // 可以根据需要添加校验规则
     actualreturntime: [{ required: true, message: "时间不能为空", trigger: "blur" }],
-    auditstatus: [{ required: true, message: "选项不能为空", trigger: "blur" }],
+    auditstatus: [{ required: true, message: "选项不能为空", trigger: "change" }],
     customerId: [{ required: true, message: "请选择客户姓名", trigger: "blur" }],
     outgoingreason: [{ required: true, message: "外出事由不能为空", trigger: "blur" }],
     outgoingtime: [{ required: true, message: "外出时间不能为空", trigger: "blur" }],
@@ -456,7 +456,7 @@ const save = () => {
                 dialog.item.password = "000000";
                 dialog.item.roleId = 2;
                 dialog.item.isDeleted = 0;
-                addOutward(dialog.item).then(res => {
+                addOutward(dialog.item).then((res) => {
                     if (res.flag) {
                         ElMessage.success(res.message);
                         // 刷新数据表格
@@ -497,13 +497,17 @@ const del = (id) => {
 
 // api-查询客户信息列表-分页
 const fetchPageList = () => {
+    console.log("调用fetchPageList，condition:", condition);
     getListPage(condition).then(res => {
+        console.log("fetchPageList响应:", res);
         pageList.value = res.data.records; // 数据列表
 
         page.total = res.data.total; // 总记录数
         page.pageSize = res.data.size; // 每页显示条数
         page.currentPag = res.data.current; // 当前页码
         page.pagCount = res.data.pages; // 总页数
+    }).catch(err => {
+        console.error("fetchPageList错误:", err);
     });
 };
 
@@ -514,18 +518,28 @@ const fetchCustomerOptions = async () => {
         pageNum: 1,
         pageSize: 10000  // 大页数获取全量
     };
-    const res = await getListPage(params);
-    customerOptions.value = res.data.records || [];
+    console.log("调用fetchCustomerOptions，params:", params);
+    try {
+        const res = await getListPage(params);
+        console.log("fetchCustomerOptions响应:", res);
+        customerOptions.value = res.data.records || [];
+    } catch (err) {
+        console.error("fetchCustomerOptions错误:", err);
+    }
 };
 
 // api-查询外出申请记录
 const queryOutwardVoData = () => {
+    console.log("调用queryOutwardVoData，conditionRecord:", conditionRecord);
     queryOutwardVo(conditionRecord).then(res => {
+        console.log("queryOutwardVoData响应:", res);
         outwardList.value = res.data.records;
         pageRecord.total = res.data.total; // 总记录数
         pageRecord.pageSize = res.data.size; // 每页显示条数
         pageRecord.currentPag = res.data.current; // 当前页码
         pageRecord.pagCount = res.data.pages; // 总页数
+    }).catch(err => {
+        console.error("queryOutwardVoData错误:", err);
     });
 };
 

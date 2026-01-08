@@ -75,7 +75,7 @@
                                         <!-- <el-button v-if="scope.row.auditstatus === 1 && dialog.item.roleId === 2" :disabled="scope.row.actualreturntime" type="success" size="small" round plain @click="updateTime(scope.row.id)">登记回院时间</el-button> -->
                                         <el-button type="danger" size="small" round plain
                                             @click="del(scope.row.id)">撤销申请</el-button>
-                                        <el-button type="primary" size="small" round plain
+                                        <el-button v-if="scope.row.auditstatus === 0" type="primary" size="small" round plain
                                             @click="examine(scope.row)">审批</el-button>
                                     </template>
                                 </el-table-column>
@@ -419,6 +419,7 @@ const del = (id) => {
 
 // 初始化
 onMounted(() => {
+    roleId.value = 2; // 临时设置为2以显示添加按钮
     //roleId.value = getSessionStorage('user').roleId;
     //conditionRecord.userId = roleId.value === 1 ? '' : getSessionStorage('user').id;
     //condition.userId = roleId.value === 1 ? '' : getSessionStorage('user').id;

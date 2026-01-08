@@ -404,36 +404,6 @@ const del =  (row) => {
         ElMessage.success("取消删除！！")
     });
 };
-//图片上传组件的ref属性
-const uploadRef = ref();//图片上传组件的ref属性
-const dialogImageUrl = ref("");//预览图片地址
-//上传图片
-const uploadFile = async (file) => {
-    // console.log(file);
-    //判断选择的图片是不是图片类型
-    const typeArr = ["image/png", "image/gif", "image/jpeg", "image/jpg"];
-    const isImg = typeArr.indexOf(file.raw.type) !== -1; //判断图片类型
-    const isMore3M = file.size / 1024 / 1024 < 3; //判断图片大小
-    if (!isImg) {
-        ElMessage.warning("只能上传图片类型!");
-        uploadRef.value.clearFiles();//清空图片
-        return;
-    }
-    if (!isMore3M) {
-        ElMessage.warning("图片大小不能超过3M!");
-        uploadRef.value.clearFiles();//清空图片
-        return;
-    }
-    //组装上传的数据
-    const formData = new FormData();
-    formData.append("file", file.raw);
-    //提交数据
-    const res = await upload(formData)
-    if (res.flag) {
-        ElMessage.success(res.message)
-        dialog.food.foodImg = "http://localhost:10086" + res.data;
-    }
-};
 
 //保存膳食信息
 const saveMeal = () => {
@@ -519,6 +489,11 @@ const rules = reactive({
     isHalal: [{ required: true, message: "请选择是否清真", trigger: "blur" }],
 });
 
+// ========== 膳食管理相关函数 ==========
+
+// ========== 菜品管理相关函数 ==========
+
+// ========== 通用函数 ==========
 </script>
 
 <style lang="scss" scoped>
