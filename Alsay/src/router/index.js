@@ -106,10 +106,10 @@ const routes = [
       // 其他页面可以继续添加
     ]
   },
-  // 添加 /home 重定向到 /dashboard
+  // 添加 /home 重定向到 /main
   {
     path: '/home',
-    redirect: '/dashboard'
+    redirect: '/main'
   }
 ]
 

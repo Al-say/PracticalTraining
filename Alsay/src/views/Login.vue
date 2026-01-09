@@ -71,7 +71,7 @@ const commit = () => {
                 // 将当前登录用户信息存入storage中
                 setSessionStorage('user', res.data);
                 // 路由到第一个子菜单
-                router.push({path:'/home'});
+                router.push({path:'/main'});
             } else {
                 ElMessage.error(res.message);
             }
