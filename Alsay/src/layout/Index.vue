@@ -9,7 +9,10 @@
       <el-container>
         <!-- 头部区域 -->
         <el-header class="header">
-          <Collapse></Collapse>
+          <div class="header-left">
+            <Collapse></Collapse>
+          </div>
+          <LoginOut></LoginOut>
         </el-header>
         <!-- 主内容区，显示路由视图 -->
         <el-main class="main">
@@ -24,26 +27,37 @@
 import Menu from './Menu.vue'; 
 // 导入折叠按钮组件
 import Collapse from './Collapse.vue';
+// 导入退出登录组件
+import LoginOut from './LoginOut.vue' 
 </script>
 
 <style lang="scss" scoped>
     .container {
         // 容器高度为视口高度，确保全屏布局
         height: 100vh;
+
         .aside {
             // 侧边栏背景色
             background-color: #3CA2E0;
         }
+
         .header {
             // 头部背景色
-            background-color: #81b8e8;
+            background-color: #2174c2;
             display: flex;
             align-items: center;
             color: #FFF;
+            justify-content: space-between;
+
+            .header-left {
+                display: flex;
+                align-items: center;
+            }
         }
+
         .main {
             // 主内容区背景色
-            background-color: #e7eaec;
+            background-color: #fdfeff;
         }
     }
 

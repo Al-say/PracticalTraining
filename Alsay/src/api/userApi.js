@@ -30,3 +30,7 @@ export const getImageApi = () => {
 export const loginApi = (data)=>{
     return http.post("/user/login",data)
 }
+//修改密码
+export const updatePasswordApi = (data)=>{
+    return http.put("/user/updatePassword",data)
+}
