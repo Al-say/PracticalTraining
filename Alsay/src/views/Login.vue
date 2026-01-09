@@ -105,7 +105,7 @@ onMounted(() => {
 .login {
     height: 100%;
     // background-color: #fff;
-    background-image: url("@/assets/downloaded-image.png");
+    background-image: url("@/assets/1.png");
     background-size: cover;
     display: flex;
     justify-content: center;

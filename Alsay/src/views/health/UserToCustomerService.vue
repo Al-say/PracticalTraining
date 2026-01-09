@@ -7,7 +7,7 @@
                         <el-input placeholder="客户姓名" v-model="queryParams.customerName" @clear="query" clearable
                             size="large">
                             <template #append>
-                                <el
+                                <el-button @click="query" icon="Search">查询</el-button>
                             </template>
                         </el-input>
                     </el-col>
