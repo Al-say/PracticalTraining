@@ -10,10 +10,11 @@
                             </template>
                         </el-input>
                     </el-col>
-                    <el-col :span="1">
-                        <el-button type="primary" @click="addItem" icon="Plus" color="#337ab7" style="margin-top:4px">
+                    <el-col :span="6" style="margin-top:5px">
+                        <el-button type="primary" @click="addItem" icon="Plus" color="#337ab7" >
                             <span>添加</span>
                         </el-button>
+                         <el-button type="warning" icon="Loading" @click="resetBtn">重置</el-button>
                     </el-col>
                 </el-row>
             </el-header>
@@ -46,8 +47,12 @@
                 </el-table>
                 <!-- 分页插件 -->
                 <div style="margin-top:15px">
-                    <el-pagination :page-size="page.pageSize" background :current-page="page.currentPag"
-                        layout=" prev, pager, next" :total="page.total" @current-change="handleCurrentChange" />
+                    <!-- <el-pagination :page-size="page.pageSize" background :current-page="page.currentPag"
+                        layout=" prev, pager, next" :total="page.total" @current-change="handleCurrentChange" /> -->
+
+                        <el-pagination :current-page="page.curPage" :page-size="page.pageSize" :page-sizes="[2, 3, 4, 5, 6]"
+            :size="size" :disabled="disabled" :background="background" layout="total, sizes, prev, pager, next, jumper"
+            :total="page.total" @size-change="handleSizeChange" @current-change="handleCurrentChange" />
                 </div>
             </el-main>
         </el-container>
@@ -111,14 +116,15 @@ const btnFlag = ref(true);
 const queryParams = reactive({
     status: "1", // 查询默认状态1 -启用 nickname
     nickname: "",
-    pageSize: "1" // 默认第一页
+    pageSize: "6", // 默认第一页
+    curPage: "1"
 });
 
 // 分页属性封装
 const page = reactive({
     total: 0,
     pageSize: 6,
-    currentPag: 1,
+    curPage: 1,
     pagCount: 0
 });
 
@@ -151,7 +157,7 @@ const rules = reactive({
 
 // 计算属性
 const indexMethod = computed(() => {
-    return page.currentPag * page.pageSize - page.pageSize + 1;
+    return page.curPage * page.pageSize - page.pageSize + 1;
 });
 // 页面加载时获取用户列表
 onMounted(() => {
@@ -159,29 +165,41 @@ onMounted(() => {
 });
 // 点击查询
 const query = () => {
-    queryParams.pageSize = "1"; // 回到第一页
+    // queryParams.pageSize = "1"; // 回到第一页
+    queryParams.curPage = "1";
     getUserList();
 };
 // 点击启用
 const enable = () => {
     btnFlag.value = true;
     queryParams.status = "1"; // 1-启用
-    queryParams.pageSize = "1"; // 回到第一页
+    queryParams.curPage = "1"; // 回到第一页
     getUserList();
 };
 
 // 点击停用
 const disable = () => {
     btnFlag.value = false;
-    queryParams.pageSize = "1"; // 2-停用
+    queryParams.curPage = "1"; // 2-停用
     queryParams.status = "2"; // 0-生效床位信息
     getUserList();
 };
 // 选中页码
 const handleCurrentChange = (curPage) => {
-    page.currentPag = curPage;
-    queryParams.pageSize = curPage; // 参数pageSize是服务端接收页码参数名
+    page.curPage = curPage;
+    queryParams.curPage = curPage; // 参数pageSize是服务端接收页码参数名
     // 重新渲染表格
+    getUserList();
+};
+const handleSizeChange = (size) => {
+    page.pageSize = size;
+    queryParams.pageSize = size; // 参数pageSize是服务端接收页码参数名
+    getUserList();
+};  
+
+const resetBtn = () => {
+    queryParams.nickname = '';
+    queryParams.curPage = "1";
     getUserList();
 };
 // 点击修改
@@ -250,7 +268,7 @@ const save = () => {
                     ElMessage.success(res.message);
                     // 刷新数据表格(回到最初查询状态)
                     queryParams.status = "1";
-                    queryParams.pageSize = "1"; // 回到第一页
+                    queryParams.curPage  = "1"; // 回到第一页
                     queryParams.itemName = "";
                     getUserList();
                     handleClose(); // 关闭模态框
@@ -302,7 +320,7 @@ const getUserList = () => {
         userList.value = res.data.records;
         page.total = res.data.total; // 总记录数
         page.pageSize = res.data.size; // 每页显示条数
-        page.currentPag = res.data.current; // 当前页码
+        page.curPage = res.data.current; // 当前页码
         page.pagCount = res.data.pages; // 总页数
     });
 };

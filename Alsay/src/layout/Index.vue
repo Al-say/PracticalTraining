@@ -11,6 +11,7 @@
         <el-header class="header">
           <div class="header-left">
             <Collapse></Collapse>
+            <BreadCrumb></BreadCrumb>
           </div>
           <LoginOut></LoginOut>
         </el-header>
@@ -27,6 +28,8 @@
 import Menu from './Menu.vue'; 
 // 导入折叠按钮组件
 import Collapse from './Collapse.vue';
+// 导入面包屑组件
+import BreadCrumb from './BreadCrumb.vue';
 // 导入退出登录组件
 import LoginOut from './LoginOut.vue' 
 </script>
