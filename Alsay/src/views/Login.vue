@@ -71,7 +71,7 @@ const commit = () => {
                 // 将当前登录用户信息存入storage中
                 setSessionStorage('user', res.data);
                 // 路由到第一个子菜单
-                router.push({path:'/main'});
+                router.push({path:'/home'});
             } else {
                 ElMessage.error(res.message);
             }
@@ -93,7 +93,7 @@ const rules = reactive({
     ]
 })
 //重置
-const resetBtn = ()=>{
+const resetBtn = () =>{
     form.value.resetFields()
 }
 onMounted(() => {
@@ -105,7 +105,7 @@ onMounted(() => {
 .login {
     height: 100%;
     // background-color: #fff;
-    // background-image: url("@/assets/downloaded-image.png");
+    background-image: url("@/assets/downloaded-image.png");
     background-size: cover;
     display: flex;
     justify-content: center;
