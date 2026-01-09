@@ -3,7 +3,7 @@ import router from "../router"
 import { ElMessage } from 'element-plus'; // 引入Element Plus的消息组件
 
 const instance = axios.create({
-    baseURL: "", // 使用代理时设置为空
+    baseURL: "/api", // 设置为 /api，走代理转发到后端
     timeout: 10000, // 设置超时时间为10秒
     withCredentials: true // 允许携带cookie
 })

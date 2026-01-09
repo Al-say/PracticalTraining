@@ -67,6 +67,36 @@ const routes = [
           icon: "Setting",
           roles: ["sys:addItemToLevel"],
         },
+      },
+      {
+        path: "/userToCustomerService",
+        component: () => import("@/views/health/UserToCustomerService.vue"),
+        name: "userToCustomerService",
+        meta: {
+          title: "设置服务",
+          icon: "Setting",
+          roles: ["sys:userToCustomerService"],
+        },
+      },
+      {
+        path: "/serviceBuy",
+        component: () => import("@/views/health/ServiceBuy.vue"),
+        name: "serviceBuy",
+        meta: {
+          title: "购买护理服务",
+          icon: "Setting",
+          roles: ["sys:serviceBuy"],
+        },
+      },
+      {
+        path: "/userManage",
+        component: () => import("@/views/health/UserManage.vue"),
+        name: "userManage",
+        meta: {
+          title: "用户管理",
+          icon: "Setting",
+          roles: ["sys:userManage"],
+        },
       }
       // 其他页面可以继续添加
     ]

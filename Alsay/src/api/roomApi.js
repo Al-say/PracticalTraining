@@ -2,5 +2,5 @@
 import http from '@/http/index.js';
 
 export const listRoom = () => {
-     return http.get('/api/room/listRoom')
+     return http.get('/room/listRoom')
 }
