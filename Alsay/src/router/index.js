@@ -110,6 +110,11 @@ const routes = [
   {
     path: '/home',
     redirect: '/main'
+  },
+  // 添加 /dashboard 重定向到 /main/dashboard
+  {
+    path: '/dashboard',
+    redirect: '/main/dashboard'
   }
 ]
 
