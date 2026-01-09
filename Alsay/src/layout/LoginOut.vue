@@ -5,7 +5,7 @@
         </span>
         <el-dropdown>
             <span class="el-dropdown-link">
-                <img class="userimg" src="@/assets/magic.jpg" />
+                <img class="userimg" src="@/assets/logo.svg" />
             </span>
             <template #dropdown>
                 <el-dropdown-menu>
