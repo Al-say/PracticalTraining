@@ -22,3 +22,11 @@ export const updateUser = (data) => {
 export const delUser = (id) => {
     return http.delete(`/user/delUser/${id}`)
 }
+//获取验证码
+export const getImageApi = () => {
+    return http.post("/user/image")
+}
+//登录
+export const loginApi = (data)=>{
+    return http.post("/user/login",data)
+}

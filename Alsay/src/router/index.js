@@ -4,7 +4,12 @@ import Layout from '@/layout/Index.vue'
 // 路由配置
 const routes = [
   {
-    path: '/',
+    path: "/",
+    name: "login",
+    component: () => import("@/views/Login.vue"),
+  },
+  {
+    path: '/main',
     component: Layout,
     redirect: '/dashboard',
     children: [
